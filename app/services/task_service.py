@@ -5,7 +5,7 @@ from app.models import Tag, Task
 
 def list_tasks(db: Session) -> list[Task]:
     # 태그를 selectinload로 즉시 로딩해 N+1 쿼리를 방지합니다.
-    return db.query(Task).options(selectinload(Task.tags)).all()
+    return db.query(Task).options(selectinload(Task.tags)).order_by(Task.id).all()
 
 
 def get_task(db: Session, task_id: int) -> Task | None:
